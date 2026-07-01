@@ -7,15 +7,15 @@ class MinStack {
     
     public void push(int value) {
         st.push(value);
-        if(minStack.isEmpty() || minStack.peek() > value)
-            minStack.push(value);
-        else
-            minStack.push(minStack.peek()); 
+        if(minStack.isEmpty() || minStack.peek() >= value)// isme hm check kar rhe hai ki minstack ke peek pe jo value hai bo agr new value se big hai to hm aane bali value ko minimum let karenge
+            minStack.push(value); 
     }
     
     public void pop() {
+        if(st.peek()<=minStack.peek())// agr minstack value me stack me same value hai to hme minstack se remove karna padega
+            minStack.pop();
         st.pop();
-        minStack.pop();  
+          
     }
     
     public int top() {
