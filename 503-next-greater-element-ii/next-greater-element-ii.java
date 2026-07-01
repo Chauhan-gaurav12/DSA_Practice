@@ -1,21 +1,16 @@
 class Solution {
     public int[] nextGreaterElements(int[] nums) {
-        Stack<Integer> st=new Stack<>();
         int n=nums.length;
-        int [] tmp=new int[n];
-        
+        int top=-1;
+        int []stack=new int[n*2];
+        int []res=new int[n];
         for(int i=2*n-1;i>=0;i--){
-            while(!st.isEmpty() && st.peek()<=nums[i%n]){ // i%n use because make array circular
-                st.pop(); // remove element untill greater element from the stack is not come;
+            while(top!=-1 && nums[i%n]>=nums[stack[top]]){
+                top--;
             }
-            if(st.size()==0){
-                tmp[i%n]=-1;
-            }
-            else{
-                tmp[i%n]=st.peek();
-            }
-            st.push(nums[i%n]);
+            res[i%n]=(top==-1)? -1 : nums[stack[top]];
+            stack[++top]=i%n;
         }
-        return tmp;
+       return res;
     }
 }
