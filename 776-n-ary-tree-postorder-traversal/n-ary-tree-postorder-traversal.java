@@ -21,10 +21,10 @@ class Solution {
     private void postOrder(Node root,ArrayList pat){
         if(root==null)
             return;
-        for(int i=0;i<root.children.size();i++){
-            postOrder(root.children.get(i),pat);
+        for(Node child:root.children){
+           postOrder(child,pat);
         }
-        pat.add(root.val);
+         pat.add(root.val);
     }
     public List<Integer> postorder(Node root) {
         if(root==null)
