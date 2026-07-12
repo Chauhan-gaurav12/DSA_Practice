@@ -12,11 +12,10 @@ class Solution {
             }
       }
 
-      int []res =new int[n];
 
       for(int i=0;i<n;i++){
-            res[i]=hp.get(arr[i]);
+            sorted[i]=hp.get(arr[i]);
       }    
-    return res;
+    return sorted;
     }
 }
