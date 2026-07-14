@@ -17,12 +17,6 @@ class Solution {
     public int countNodes(TreeNode root) {
         if(root==null)
             return 0;
-        int t_ele=count(root);
-        return t_ele;
-    }
-    public int count(TreeNode root){
-        if(root==null)
-            return 0;
-        return 1+count(root.left)+count(root.right);
+        return 1+countNodes(root.left)+countNodes(root.right);
     }
 }
