@@ -1,5 +1,8 @@
 class Solution {
     public void rotate(int[][] matrix) {
+// for this problem solution 
+    // 1. first we will transpose the matrix 
+    // 2. then reverse the matrix row wise
         for(int i=0;i<matrix.length;i++){
             for(int j=0;j<i;j++){
                 int temp=matrix[i][j];
