@@ -8,7 +8,6 @@ class Solution {
             arr[pos--]=nums[i];
         }
 
-        System.gc();
         return arr;
     }
 }
