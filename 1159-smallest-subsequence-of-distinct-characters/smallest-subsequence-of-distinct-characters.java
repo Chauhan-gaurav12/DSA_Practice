@@ -1,29 +1,30 @@
 class Solution {
     public String smallestSubsequence(String s) {
-        int[] freq=new int[26];
-        boolean[] check=new boolean[26];
-    // fill last Index 
-        for(int i=0;i<s.length();i++){
-            freq[s.charAt(i)-'a']=i; 
+        // first we create a last index array of string 
+        int n=s.length();
+        int [] lastIndex=new int[26];
+        for(int i=0;i<n;i++){
+            lastIndex[s.charAt(i)-'a']=i;
         }
+        // we will create a steck to check lexicographically order
         Stack<Character> st=new Stack<>();
-    // trave;l to string
-    for(int i=0;i<s.length();i++){
-        char ch=s.charAt(i); // current character
-        if(check[ch-'a'])continue;
+        // also we will create a array for checking that comming element is already in the stack 
+        boolean []visit=new boolean[26];
 
-        while(!st.isEmpty() && st.peek()>ch && freq[st.peek()-'a']>i){
-            check[st.pop()-'a']=false;
+        for(int i=0;i<n;i++){
+            char ch=s.charAt(i);
+            if(visit[ch-'a']) continue;
+
+            while(!st.isEmpty() && st.peek()> ch && lastIndex[st.peek()-'a'] >i ){
+                visit[st.pop()-'a']=false;
+            }
+            st.push(ch);
+            visit[ch-'a']=true;
         }
-        st.push(ch);
-        check[ch-'a']=true;
-    }
         StringBuilder sb=new StringBuilder();
-        for(char ch:st)
+        for (char ch : st){
             sb.append(ch);
-        
-        // return ans
-
+        }
         return sb.toString();
     }
 }
