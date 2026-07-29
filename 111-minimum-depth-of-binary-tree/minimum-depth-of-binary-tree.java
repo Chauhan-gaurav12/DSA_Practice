@@ -17,14 +17,27 @@ class Solution {
     public int minDepth(TreeNode root) {
         if(root==null)
             return 0;
-         // If left subtree is empty, forced to check right path
-        if(root.left==null)
-            return 1+minDepth(root.right);
-        // if right subtree is empty , firced to check left path;
-        if(root.right==null)
-            return 1+minDepth(root.left);
-        
-        // If both subtrees exist, pick the shorter route
-        return 1+Math.min(minDepth(root.left),minDepth(root.right));
+         // with the help of queue
+         Queue <TreeNode> ans=new LinkedList<>();
+         int depth=1;
+         ans.add(root);
+         while(!ans.isEmpty()){
+            int level=ans.size();
+            for(int i=0;i<level;i++){
+                TreeNode temp=ans.poll();
+
+                // check that temp node is leaf node 
+                if(temp.left==null && temp.right==null)
+                    return depth;
+                
+                //  if not leaf node so add children into queue 
+                if(temp.left!=null)
+                    ans.add(temp.left);
+                if(temp.right!=null)
+                    ans.add(temp.right);
+            }
+            depth++;
+         }
+         return depth;
     }
 }
