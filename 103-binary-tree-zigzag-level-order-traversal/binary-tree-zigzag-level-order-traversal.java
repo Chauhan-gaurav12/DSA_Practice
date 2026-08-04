@@ -17,33 +17,31 @@ class Solution {
     public List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         if(root==null)
             return new ArrayList<>();
+        List<List<Integer>> result =new ArrayList<>();
+        Queue<TreeNode> que=new LinkedList<>();
+        boolean lefttoRight=true;
+        que.add(root);
+        while(!que.isEmpty()){
+            LinkedList<Integer> ans=new LinkedList<>();
+            int n =que.size();
+            for(int i=0;i<n;i++){
+                TreeNode temp=que.poll();
 
-        List<List<Integer>> res=new ArrayList<>();
-        Queue<TreeNode> qt=new LinkedList<>();
-
-        qt.add(root);
-        Boolean left_to_right=true;
-        while(!qt.isEmpty()){
-            int size=qt.size();
-            ArrayList<Integer> ans=new ArrayList<>();
-            for(int i=0;i<size;i++){
-                TreeNode temp=qt.poll();
-        // here we are checking we have to go right or left now 
-                if(left_to_right)
-                    ans.addLast(temp.val);
+                if(lefttoRight)
+                    ans.add(temp.val);
                 else
                     ans.addFirst(temp.val);
 
-                if(temp.left!=null){
-                    qt.add(temp.left);
-                }
-                if(temp.right!=null){
-                    qt.add(temp.right);
-                }
+                    
+                if(temp.left!=null)
+                    que.add(temp.left);
+                if(temp.right!=null)
+                    que.add(temp.right);
             }
-            left_to_right=!left_to_right;
-            res.add(ans);
+            result.add(ans);
+            lefttoRight=!lefttoRight;
         }
-        return res;
+        return result;
+        
     }
 }
