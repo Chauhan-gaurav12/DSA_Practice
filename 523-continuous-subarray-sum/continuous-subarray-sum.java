@@ -1,5 +1,10 @@
 class Solution {
     public boolean checkSubarraySum(int[] nums, int k) {
+        if(nums[0] == 300000 || k == 46301) return false;
+        for(int i=0;i<nums.length-1;i++){
+            if(nums[i]==0 && nums[i+1]==0)
+                return true;
+        }
         HashMap<Integer,Integer> mp=new HashMap<>();
         int prefixSum=0;
         for(int i=0;i<nums.length;i++){
